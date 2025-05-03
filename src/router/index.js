@@ -3,8 +3,15 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '@/Layout/DefaultLayout.vue'
 import LoginLayout from '@/Layout/LoginLayout.vue'
 
-import DashbordView from '@/views/DashbordView.vue'
 import LoginView from '@/views/LoginView.vue'
+import DashbordView from '@/views/DashbordView.vue'
+import ProductView from '../views/ProductView.vue'
+import CategoryView from '../views/CategoryView.vue'
+import WarehouseView from '../views/WarehouseView.vue'
+import StockMovementView from '../views/StockMovementView.vue'
+import ReportingView from '../views/ReportingView.vue'
+import UserManagementView from '../views/UserManagementView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,7 +36,43 @@ const router = createRouter({
           name: 'dashbord',
           component: DashbordView,
           meta: { requiresAuth: true }
-        }
+        },
+        {
+          path: 'product',
+          name: 'product',
+          component: ProductView,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'category',
+          name: 'category',
+          component: CategoryView,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'warehouse',
+          name: 'warehouse',
+          component: WarehouseView,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'stock',
+          name: 'stockmovement',
+          component: StockMovementView,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'report',
+          name: 'reporting',
+          component: ReportingView,
+          meta: { requiresAuth: true }
+        },
+        {
+          path: 'user',
+          name: 'usermanagement',
+          component: UserManagementView,
+          meta: { requiresAuth: true }
+        },
       ]
     },
     { path: '/:pathMatch(.*)*', redirect: '/login' }
