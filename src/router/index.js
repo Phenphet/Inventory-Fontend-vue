@@ -27,11 +27,24 @@ const router = createRouter({
         {
           path: '',
           name: 'dashbord',
-          component: DashbordView
+          component: DashbordView,
+          meta: { requiresAuth: true }
         }
       ]
-    }
+    },
+    { path: '/:pathMatch(.*)*', redirect: '/login' }
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  if(to.meta.requiresAuth && !token){
+    next('/login')
+  }else if(to.path === '/login' && token){
+    next('/')
+  }else{
+    next()
+  }
 })
 
 export default router
