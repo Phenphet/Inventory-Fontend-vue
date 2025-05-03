@@ -3,6 +3,9 @@
     import { useRouter } from 'vue-router'
     import { useLoginStore } from '../stores/login'
 
+
+    import Swal from 'sweetalert2'
+
     const router = useRouter()
     const loginStore = useLoginStore()
 
@@ -18,6 +21,12 @@
             fromData.value.email = ''
             fromData.value.password = ''
             router.push('/')
+            Swal.fire({
+                icon: 'success',
+                text: 'Login Success',
+                timer: 2000
+            })
+            
         }
     }
 </script>

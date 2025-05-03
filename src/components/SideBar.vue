@@ -1,32 +1,43 @@
 <script setup>
-  import { ref, onMounted } from 'vue'
-  import { RouterLink } from 'vue-router' 
-  import { useLoginStore } from '../stores/login'
-  import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
+import { useLoginStore } from '../stores/login'
+import { useRouter } from 'vue-router'
 
-  const useLogin = useLoginStore()
-  const router = useRouter()
-  const fullname = ref('')
+import Swal from 'sweetalert2'
 
-  const clickLogout = async () => {
-    // Swal.fire({
-    //   title: "Good job!",
-    //   text: "You clicked the button!",
-    //   icon: "success"
-    // });
-    await useLogin.logout()
-    router.push('/login')
-  }
+const useLogin = useLoginStore()
+const router = useRouter()
+const fullname = ref('')
 
-  onMounted(() => {
-    getfullname()
+const clickLogout =  () => {
+  Swal.fire({
+    title: "Confirm",
+    text: "Logout confirm!",
+    icon: "question",
+    showCancelButton: true,
+    cancelButtonText: "No",
+    confirmButtonText: "Yes",
+  }).then(async(result) => {
+    if (result.isConfirmed) {
+      await useLogin.logout()
+      router.push('/login')
+    } else {
+      console.log("User canceled")
+    }
   })
 
-  const getfullname = () => {
-    fullname.value = localStorage.getItem('fullname')
-  }
+}
 
-  
+onMounted(() => {
+  getfullname()
+})
+
+const getfullname = () => {
+  fullname.value = localStorage.getItem('fullname')
+}
+
+
 </script>
 <template>
   <main>
@@ -56,7 +67,7 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-header">MENU</li>
             <li class="nav-item">
-              <RouterLink to="/" class="nav-link" :class=" $route.path === '/' ? 'active' : '' ">
+              <RouterLink to="/" class="nav-link" :class="$route.path === '/' ? 'active' : ''">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -64,7 +75,7 @@
               </RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink to="/product" class="nav-link" :class=" $route.path === '/product' ? 'active' : '' ">
+              <RouterLink to="/product" class="nav-link" :class="$route.path === '/product' ? 'active' : ''">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Product Management
@@ -73,7 +84,7 @@
             </li>
 
             <li class="nav-item">
-              <RouterLink to="/category" class="nav-link" :class=" $route.path === '/category' ? 'active' : '' ">
+              <RouterLink to="/category" class="nav-link" :class="$route.path === '/category' ? 'active' : ''">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Category Management
@@ -82,7 +93,7 @@
             </li>
 
             <li class="nav-item">
-              <RouterLink to="/warehouse" class="nav-link" :class=" $route.path === '/warehouse' ? 'active' : '' ">
+              <RouterLink to="/warehouse" class="nav-link" :class="$route.path === '/warehouse' ? 'active' : ''">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Warehouse / Location Management
@@ -91,7 +102,7 @@
             </li>
 
             <li class="nav-item">
-              <RouterLink to="/stock" class="nav-link" :class=" $route.path === '/stock' ? 'active' : '' ">
+              <RouterLink to="/stock" class="nav-link" :class="$route.path === '/stock' ? 'active' : ''">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Stock Movement
@@ -100,7 +111,7 @@
             </li>
 
             <li class="nav-item">
-              <RouterLink to="/report" class="nav-link" :class=" $route.path === '/report' ? 'active' : '' ">
+              <RouterLink to="/report" class="nav-link" :class="$route.path === '/report' ? 'active' : ''">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Reporting & Alerts
@@ -109,7 +120,7 @@
             </li>
 
             <li class="nav-item">
-              <RouterLink to="/user" class="nav-link" :class=" $route.path === '/user' ? 'active' : '' ">
+              <RouterLink to="/user" class="nav-link" :class="$route.path === '/user' ? 'active' : ''">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   User Management
