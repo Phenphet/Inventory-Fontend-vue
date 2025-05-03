@@ -9,6 +9,11 @@
   const fullname = ref('')
 
   const clickLogout = async () => {
+    // Swal.fire({
+    //   title: "Good job!",
+    //   text: "You clicked the button!",
+    //   icon: "success"
+    // });
     await useLogin.logout()
     router.push('/login')
   }
@@ -20,6 +25,8 @@
   const getfullname = () => {
     fullname.value = localStorage.getItem('fullname')
   }
+
+  
 </script>
 <template>
   <main>
