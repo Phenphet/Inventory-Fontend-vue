@@ -1,10 +1,9 @@
 <script setup>
     import { ref } from 'vue' 
     import { useRouter } from 'vue-router'
-    import { useLoginStore } from '../stores/login'
-
-
     import Swal from 'sweetalert2'
+
+    import { useLoginStore } from '../stores/login'
 
     const router = useRouter()
     const loginStore = useLoginStore()
@@ -15,7 +14,6 @@
     })
 
     const submitFrom = async () => {
-        console.log(fromData.value)
         if (fromData.value.email !== '' && fromData.value.password !== ''){
             await loginStore.login(fromData.value)
             fromData.value.email = ''
@@ -23,10 +21,9 @@
             router.push('/')
             Swal.fire({
                 icon: 'success',
-                text: 'Login Success',
+                text: 'เข้าสู่ระบบเรียบร้อย',
                 timer: 2000
             })
-            
         }
     }
 </script>
@@ -37,7 +34,7 @@
             <div class="login-logo">
                 <a href="#"><b>Admin</b>LTE</a>
             </div>
-            <!-- /.login-logo -->
+
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Sign in to start your session</p>
@@ -68,11 +65,11 @@
                                     </label>
                                 </div>
                             </div>
-                            <!-- /.col -->
+                            
                             <div class="col-4">
                                 <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                             </div>
-                            <!-- /.col -->
+                           
                         </div>
                     </form>
 
@@ -80,7 +77,7 @@
                         <a href="#">I forgot my password</a>
                     </p>
                 </div>
-                <!-- /.login-card-body -->
+                
             </div>
         </div>
     </main>

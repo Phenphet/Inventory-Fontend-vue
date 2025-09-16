@@ -13,27 +13,13 @@ export const useLoginStore = defineStore('login', {
                    email: fromData.email,
                    password: fromData.password
                 })
-                .then( async (res) => {
-                    this.token = await res.data.token
-                    await axios.get(`http://localhost:3001/user/verifytoken`, {
-                        headers: {
-                            Authorization: this.token
-                        }
-                    })
-                    .then((res) => {
-                        if (res.status === 200){
-                            localStorage.setItem('fullname', res.data.fullname)
-                            this.isLogin = true
-                        }
-                    } )
-                    .catch((err) => console.log(err))
-
-
-                    localStorage.setItem('token', this.token)
+                .then((res) => {
+                    localStorage.setItem('token', res.data.token)
+                    this.isLogin = true
                 })
                 .catch( (err) => console.log(err) )
             }catch(e){
-                console.log(e.message)
+                console.error(e.message)
             }
         },
         logout() {
@@ -50,6 +36,29 @@ export const useLoginStore = defineStore('login', {
             }catch(e){
                 console.log(e.message)
             }
+        },
+
+        async chechLogin(token) {
+            try{
+                const result = await axios.get('http://localhost:3001/user/verifytoken', {
+                    headers: {
+                        Authorization: token
+                    }
+                })
+                
+                if(result.status === 200){
+                    this.isLogin = true
+                    return true
+                }else{
+                    localStorage.removeItem('token')
+                    return false
+                }
+               
+            }catch (e) {
+                localStorage.removeItem('token')
+                return false
+            }
         }
+
     }
 })

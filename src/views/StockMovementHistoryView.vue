@@ -1,30 +1,17 @@
-<script setup>
-    import { onMounted } from 'vue'
-    import { useReportingStore } from '@/stores/reporting'
-
-    const reportStore = useReportingStore()
-
-    onMounted(() => {
-        reportStore.getReport()
-    })
-
-    const formatDate = (date) => { 
-        const format = date.split('T')[0]
-        return format
-    }
-
-</script>
-
 <template>
     <main>
-        <div class="content-header">
-            <div class="container-fluid">
-                <h1>Reporting</h1>
-            </div>
-        </div>
-        <section class="content">
-            <div class="container-fluid">
-                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header row">
+                        <h3 class="card-title col-sm-10 pt-2">Table Movement History All </h3>
+                        <div class="col-sm-2">
+                            <button class="btn btn-success">Add warehouse</button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table class="table table-bordered table-hover dataTable dtr-inline " role="grid">
@@ -32,24 +19,15 @@
                                             <tr role="row">
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1" aria-label="Browser: activate to sort column ascending">
-                                                    Date</th>
+                                                    Warehouse Name</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Platform(s): activate to sort column ascending">
-                                                    Product Name</th>
+                                                    Address</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Platform(s): activate to sort column ascending">
-                                                    Quantity</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="Platform(s): activate to sort column ascending">
-                                                    remarks</th>
-
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="Platform(s): activate to sort column ascending">
-                                                    Referenc</th>
+                                                    Zone</th>
                                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                     colspan="1"
                                                     aria-label="CSS grade: activate to sort column ascending">
@@ -57,37 +35,34 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="" v-for="item in reportStore.reportOut" >
-                                                <td>{{ formatDate( item.movement_date ) }}</td>
-                                                <td>{{ item.product.name }}</td>
-                                                <td>{{ item.quantity }}</td>
-                                                <td>{{ item.remarks }}</td>
-                                                <td>{{ item.reference_number }}</td>
-
+                                            <tr class="" v-for="items in 6">
+                                                <td>{{ }}</td>
+                                                <td>{{ }}</td>
+                                                <td>{{ }}</td>
                                                 <td class="">
                                                     <button class="btn btn-info">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit" @click="">
+                                                    <button class="btn btn-warning">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
-                                                    <button class="btn btn-danger" @click="">
+                                                    <button class="btn btn-danger">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </button>
                                                 </td>
                                             </tr>
                                         </tbody>
-                                        <!-- <tfoot>
+                                        <tfoot>
                                             <tr>
                                                 <th rowspan="1" colspan="1">Category Name</th>
                                                 <th rowspan="1" colspan="1">Description</th>
                                                 <th rowspan="1" colspan="1">Service</th>
                                             </tr>
-                                        </tfoot> -->
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
-                            <!-- <div class="row">
+                            <div class="row">
                                 <div class="col-sm-12 col-md-5">
                                     <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">
                                         Showing 1 to 10
@@ -110,9 +85,14 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
             </div>
-        </section>
+            <!-- /.col -->
+        </div>
     </main>
 </template>
